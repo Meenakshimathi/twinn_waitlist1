@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 function Waitlist() {
@@ -16,7 +16,7 @@ function Waitlist() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
 
     try {
@@ -27,106 +27,64 @@ function Waitlist() {
 
       alert(res.data.message);
 
-      setFormData({
-        fullName: "",
-        email: "",
-        business: "",
-        phone: "",
-      });
-    } catch (error) {
-      console.error(error);
-      alert("Failed to join waitlist");
+    } catch (err) {
+      alert(
+        err.response?.data?.message ||
+          "Something went wrong"
+      );
     }
   };
 
   return (
-    <div
-      style={{
-        maxWidth: "600px",
-        margin: "50px auto",
-        padding: "30px",
-        border: "1px solid #ddd",
-        borderRadius: "10px",
-      }}
-    >
+    <div style={{ width: "500px", margin: "50px auto" }}>
       <h1>Join the Future of Live Commerce</h1>
 
-      <p>
-        Be the first to know when AI Twin goes live.
-        Join our waitlist and get early access,
-        exclusive updates and special launch benefits.
-      </p>
-
-      <h2>Join the Waitlist</h2>
-
-      <p>Fill in your details and we'll keep you in the loop.</p>
-
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submitForm}>
         <input
           type="text"
           name="fullName"
           placeholder="Full Name"
-          value={formData.fullName}
           onChange={handleChange}
           required
-          style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
         />
+
+        <br />
+        <br />
 
         <input
           type="email"
           name="email"
           placeholder="Email Address"
-          value={formData.email}
           onChange={handleChange}
           required
-          style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
         />
+
+        <br />
+        <br />
 
         <input
           type="text"
           name="business"
           placeholder="Your Brand / Business"
-          value={formData.business}
           onChange={handleChange}
           required
-          style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
         />
 
-        <div style={{ display: "flex", gap: "10px" }}>
-          <div
-            style={{
-              padding: "10px",
-              border: "1px solid #ccc",
-              minWidth: "80px",
-            }}
-          >
-            🇮🇳 +91
-          </div>
+        <br />
+        <br />
 
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone Number"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-            style={{ flex: 1, padding: "10px" }}
-          />
-        </div>
+        <input
+          type="text"
+          name="phone"
+          placeholder="Phone Number"
+          onChange={handleChange}
+          required
+        />
 
-        <button
-          type="submit"
-          style={{
-            width: "100%",
-            marginTop: "20px",
-            padding: "12px",
-            background: "#ff4d6d",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
+        <br />
+        <br />
+
+        <button type="submit">
           Yes! Notify Me
         </button>
       </form>
